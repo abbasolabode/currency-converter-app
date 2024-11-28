@@ -7,7 +7,7 @@ import Select from './Select';
 import { useEffect, useState } from 'react';
 
 const Main = () => {
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState();
   const [currencies, setCurrencies] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -15,12 +15,13 @@ const Main = () => {
   const [currTo, setCurrTo] = useState("");
   const [receivedData, setReceivedData] = useState({});
 
-  const convertedCurrency = receivedData?.rates?.[currTo] ?? "Data unavailable....⛔";
+  const convertedCurrency = receivedData?.rates?.[currTo] ?? "Data unavailable...";
   const date = receivedData?.date;
 
-   console.log(receivedData, date);
 
-
+    if(amount < 0){
+		setAmount('')
+	}
    
    /* Switch currency */
    function handleSwitchCurrency() {
@@ -77,7 +78,7 @@ const Main = () => {
 
 
   return (
-    <div className="w-[22.5rem] min-h-[45rem] border bg-white mx-auto mt-[3rem] shadow-2xl rounded-lg laptop:w-[90rem] laptop:min-h-[rem] laptop:mx-auto">
+    <div className="w-[22.5rem] min-h-[45rem] border bg-white mx-auto mt-[3rem] shadow-2xl rounded-3xl laptop:w-[90rem] laptop:min-h-[rem] laptop:mx-auto">
       <Header>
         <p>Currency Converter</p>
       </Header>
